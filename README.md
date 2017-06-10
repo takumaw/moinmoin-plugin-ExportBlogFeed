@@ -39,6 +39,6 @@ Available options:
 Copyright and License
 ---------------------
 
-(C) WATANABE Takuma <takumaw@sfo.kuramae.ne.jp>
+(C) 2017 WATANABE Takuma <takumaw@sfo.kuramae.ne.jp>
 
 License: GPL v2.
