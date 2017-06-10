@@ -4,9 +4,11 @@
     @copyright: 2017 WATANABE Takuma <takumaw@sfo.kuramae.ne.jp>
 """
 
+import copy
 import datetime
 import re
-import copy
+
+import feedgenerator
 
 import MoinMoin
 import MoinMoin.Page
@@ -18,7 +20,6 @@ import MoinMoin.search
 import MoinMoin.web.contexts
 import MoinMoin.web.request
 import MoinMoin.wikiutil
-import feedgenerator
 
 __version__ = "0.1.0"
 
