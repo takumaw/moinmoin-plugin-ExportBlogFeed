@@ -125,8 +125,8 @@ def _parse_feed_config(request):
 
     # parse language
 
-    if feed_conf_raw["language"]:
-        if not feed_conf_raw["blog-feed-language"]:
+    if "language" in feed_conf_raw:
+        if "blog-feed-language" not in feed_conf_raw:
             feed_conf_raw["blog-feed-language"] = feed_conf_raw["language"]
         del feed_conf_raw["language"]
 
@@ -135,7 +135,7 @@ def _parse_feed_config(request):
     if "blog-feed-number-of-items" in feed_conf_raw:
         try:
             feed_conf_raw["blog-feed-number-of-items"] = int(
-                blog_feed_item_limit)
+                feed_conf_raw["blog-feed-number-of-items"])
         except ValueError as e:
             del feed_conf_raw["blog-feed-number-of-items"]
 
@@ -151,7 +151,7 @@ def _parse_feed_config(request):
         blog_feed_link = "%(host_url)s%(url)s" % (blog_link_dict)
         feed_conf["blog-feed-link"] = blog_feed_link
 
-    if not feed_conf["blog-feed-url"]:
+    if not feed_conf["blog-feed-feed-url"]:
         blog_feed_url_dict = {
             "host_url": request.host_url[:-1],
             "url": request_page.url(request),
@@ -159,7 +159,7 @@ def _parse_feed_config(request):
         }
         blog_feed_url = "%(host_url)s%(url)s?action=%(action_name)s" % (
             blog_feed_url_dict)
-        feed_conf["blog-feed-url"] = blog_feed_url
+        feed_conf["blog-feed-feed-url"] = blog_feed_url
 
     return feed_conf
 
@@ -170,9 +170,9 @@ def _build_feed(request, feed_conf):
     request_page = MoinMoin.Page.Page(request, request.page.page_name)
 
     feed = feedgenerator.Rss201rev2Feed(
-        title=feed_conf["blog-feed_title"],
+        title=feed_conf["blog-feed-title"],
         link=feed_conf["blog-feed-link"],
-        feed_url=feed_conf["blog-feed-url"],
+        feed_url=feed_conf["blog-feed-feed-url"],
         description=feed_conf["blog-feed-description"],
         language=feed_conf["blog-feed-language"],
     )
